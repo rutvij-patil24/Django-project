@@ -1,9 +1,50 @@
-<!DOCTYPE html>
+{% extends "blog/base.html" %} <!-- This must be at the first line ALWAYS -->
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title></title>
+	{% if title %}
+		<title>Django Blog - {{title}}</title>
+	{% else %}
+		<title>Django Blog</title>
+	{% endif %}
 </head>
 <body>
 
+	<h1>BLOG HOME !!</h1>
+
+	{% for post in posts %}  --> 
+	<!-- posts variable is the key of context in views.py-->
+	<!-- above line represents how we integrate python within html (curly brace with percent symbol) -->
+		<!-- <h2>{{post.title}}</h2> --> <!-- double curly braces are used to access variable -->
+		<!-- 
+		<p>By {{post.author}} on {{post.date_posted}}</p>
+		<p>{{post.content}}</p>
+	{% endfor %}
+
 </body>
-</html>
+</html> -->
+
+<!-- Above code is done by NOT using template inheritance
+	 Below code is done using template inheritance -->
+
+
+{% block content %}
+	{% for post in posts %}
+		<article class="media content-section">
+		  <div class="media-body">
+		    <div class="article-metadata">
+		      <a class="mr-2" href="#">{{ post.author }}</a>
+		      <small class="text-muted">{{ post.date_posted }}</small>
+		    </div>
+		    <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+		    <p class="article-content">{{ post.content }}</p>
+		  </div>
+		</article>
+	{% endfor %}
+{% endblock content %}
+
+
+
+
+
